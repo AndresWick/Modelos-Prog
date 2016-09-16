@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>METODO DE LA BURBUJA</title>
+	<script type="text/javascript">
+		function calc(){
+            x = document.getElementById("N");
+            N = x.value;
+            a = new Array(N);
+
+            for (var i = 0; i < N; i++) {
+            	a[i]=N-i;
+            }
+
+            c=0;
+            c++;
+
+            for (var i = 0; i < N-1; i++) {
+             	c=c+3;    c=c+2;
+
+             	for (var j = i+1; j < N; j++) {
+             		c=c+12;
+             		if (a[i]<a[j]) {
+             			x = a[i];
+             			a[i] = a[j];
+             			a[j] = x;
+             		}
+             	} c++;
+             } c=c+2;
+
+            x = document.getElementById("C");
+            x.innerHTML = "contador: "+c;
+            formula = 6*Math.pow(N,2)-3;
+            x = document.getElementById("F");
+            x.innerHTML = "formula: " + formula;
+		}
+	</script>
+</head>
+<body>
+    <input id="N" type="text">
+    <div id="C"></div>
+    <div id="F"></div>
+    <input type="button" value="Calcular" onclick="calc();">
+</body>
+</html>

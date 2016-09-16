@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Metodos</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript">
+
+	    var N;
+	    var c_Merge=0;
+
+		function calcularBurbuja(){
+            x = document.getElementById("N_Selección");
+            N = x.value;
+            a = new Array(N);
+            for (var i = 0; i < N; i++) {
+            	a[i]=N-i;
+            }
+            c=0;
+            c++;
+            for (var i = 0; i < N-1; i++) {
+             	c=c+3;    c=c+2;
+
+             	for (var j = i+1; j < N; j++) {
+             		c=c+12;
+             		if (a[i]<a[j]) {
+             			x = a[i];
+             			a[i] = a[j];
+             			a[j] = x;
+             		}
+             	} c++;
+             } c=c+2;
+            x = document.getElementById("C_Burbuja");
+            x.innerHTML = "Contador Burbuja: "+c;
+            formula = 6*Math.pow(N,2)-3;
+            x = document.getElementById("F_Burbuja");
+            x.innerHTML = "Formula Burbuja: " + formula;
+		}
+
+         var N_Selección;
+          var a_Selección;
+          var U;
+
+        function calcularSelección() {
+                x = document.getElementById("N_Selección");
+                N_Selección = x.value;
+                U = (N_Selección/(N_Selección*0.1));
+                a_Selección = new Array(N_Selección);
+                
+                for (i=0;i<N_Selección;i++) {
+                    a_Selección[i] = N_Selección-i;
+                }
+                c = 0;
+                c+=3;
+                for (i=0;i<N_Selección-1;i++) {
+                    c+=3;
+                    min = i;
+                    c++; c+=3;
+                    for (j=i+1;j<N_Selección;j++) {
+                        c+=6;
+                        if (a_Selección[j]<a_Selección[min]) {
+                           min = j;
+                        } 
+                    }
+                    aux = a_Selección[i];
+                    a_Selección[i] = a_Selección[min];
+                    a_Selección[min] = aux;
+                    c+=7;
+                }
+                x = document.getElementById("C_Selección");
+                x.innerHTML = "Conteo Selección: " + c;
+                Formula = 3*Math.pow(N_Selección,2)+(11*N_Selección)-11;
+                x = document.getElementById("F_Selección");
+                x.innerHTML = "Formula Selección: " + Formula;
+        }
+
+
+       function llamarMergeSort(){
+                x = document.getElementById("N_Selección");
+                N_merge = x.value;
+                U = (N_merge/(N_merge*0.1));
+                a= new Array(N_merge);
+
+                for (i=0;i<N_merge;i++) {
+                    a[i] = Math.round((Math.random()*N_merge));
+                }
+      			c_Merge=0;
+               var m = calcularMergeSort(a);
+
+
+               var b = m[0];
+               for(i=1;i<m.length;i++){
+               		b = b+","+m[i];
+               }
+                x = document.getElementById("M_Arreglo");
+                x.innerHTML = "Arreglo: "+b; 
+          		x = document.getElementById("F_merge");
+          		x.innerHTML = "Formula MergeSort:" + c_Merge;
+          		x = document.getElementById("C_merge");
+          		x.innerHTML = "Conteo MergeSort: " + c_Merge;
+          		c_Merge=0;
+        }
+
+
+        function calcularMergeSort(a) {
+        	var u = Array();
+        	var v = Array();
+
+                n=a.length;
+                c_Merge = c_Merge +2;
+                if (n == 1) {
+                	return a;}
+                else  if (n == 2) {
+                  c_Merge +=3;
+                  if (a[0] > a[1]) {
+                    t = a[0];
+                    a[0] = a[1];
+                    a[1] = t;
+                    c_Merge +=7;
+                  }
+
+                  return a;
+                }
+              else {
+              	 c_Merge +=3;
+                dividir = Math.trunc(n / 2);
+         		   c_Merge +=1;
+                for (k  = 0; k < dividir; k++) {
+                  u[k] = a[k];
+                  c_Merge +=5;
+                }
+                  c_Merge +=2;
+
+                i=0;
+          
+                for (j=dividir; j<a.length; j++) {
+                  v[i] = a[j];
+                  i++;
+                   c_Merge +=7;
+                }
+                  c_Merge +=1;
+         
+              u=calcularMergeSort(u);    c_Merge +=2;
+              v=calcularMergeSort(v);	 c_Merge +=2;
+              a = mezclar(u,v,a);		   c_Merge +=1;
+          
+              return a;
+ }
+}
+        function mezclar (u,v,a) {
+          i = 0;
+          j = 0;
+          k = 0;
+             c_Merge +=3;
+
+               c_Merge +=3;
+          while(i<u.length && j<v.length){
+          	c_Merge +=3;
+            if (u[i] < v[j]) {
+            a[k] = u[i];
+            i++;
+            k++;
+               c_Merge +=5;
+            }
+            else {
+
+            a[k] = v[j];
+            j++;
+            k++;
+               c_Merge +=5;
+            }
+          }
+
+             c_Merge +=1;
+          if(i<u.length){
+          	   c_Merge +=1;
+          	while(i<u.length){
+          		a[k]=u[i];
+          		i++;
+          		k++;
+          		 c_Merge +=5;
+
+          	}
+          }
+          else{
+          	   c_Merge +=1;
+          	while(j<v.length){
+          		a[k]=v[j];
+          		j++;
+          		k++;
+          		   c_Merge +=5;
+          	}
+          }
+       
+          return a;
+        }
+
+          function obtenerCoorSelección(w) {
+                
+                P = w;
+                q = new Array(P);
+                for (i=0;i<P;i++) {
+                    q[i] = P-i;
+                }
+                c = 0;
+                c+=3;
+                for (i=0;i<P-1;i++) {
+                    c+=3;
+                    min = i;
+                    c++; c+=3;
+                    for (j=i+1;j<P;j++) {
+                        c+=6;
+                        if (q[j]<q[min]) {
+                           min = j;
+                        } 
+                    }
+                    aux = q[i];
+                    q[i] = q[min];
+                    q[min] = aux;
+                    c+=7;
+                }
+               return c;
+            }
+
+            function obtenerCoorBurbuja(b) {
+                P = b;
+            	q = new Array(P);
+            	for (var i = 0; i < P; i++) {
+            	    q[i]=P-i;
+                }
+            	 c = 0;
+                 c++;
+                for (var i = 0; i < P-1; i++) {
+             	c=c+3;  c=c+2;
+             	for (var j = i+1; j < P; j++) {
+             		c=c+12;
+             		if (q[i]<q[j]) {
+             			x = q[i];
+             			q[i] = q[j];
+             			q[j] = x;
+             		}
+             	} c++;
+             } c=c+2;
+            return c;
+            }
+
+            function obtenerCoorMerge(c){
+
+            	c_Merge = 0;
+                p= new Array(c);
+
+                for (i=0;i<c;i++) {
+                    p[i] = Math.round((Math.random()*c));
+                }
+               if(c ==0){
+               	return c_Merge;
+               }else{
+               		var j= calcularMergeSort(p);
+               		return c_Merge
+               }
+               
+            }
+
+            
+
+            function graficar(){
+            	var canvas = document.getElementById("canvasGrafica");
+            	var lapiz = canvas.getContext("2d");
+            	lapiz.fillStyle = "#FFF";
+                lapiz.strokeStyle="black";
+            	lapiz.fillRect(0,0,canvas.width,canvas.height);
+            	lapiz.strokeRect(0,0,canvas.width,canvas.height);
+
+                lapiz.fillStyle = "#000000";
+                lapiz.beginPath();
+            	lapiz.moveTo(0,canvas.height);
+            	var x =canvas.width/U;
+                lapiz.strokeStyle="green";
+                for (var i = 0; canvas.height-obtenerCoorSelección(i) > -5000; i++) {
+	            lapiz.lineTo(i*x,canvas.height-obtenerCoorSelección(i));
+            	lapiz.moveTo(i*x,canvas.height-obtenerCoorSelección(i));
+            	lapiz.stroke();
+         
+                };
+                   lapiz.beginPath();
+                 lapiz.strokeStyle="red";
+                for (var i = 0; canvas.height-obtenerCoorBurbuja(i) > -5000; i++) {
+                lapiz.lineTo(i*x,canvas.height-obtenerCoorBurbuja(i));
+                lapiz.moveTo(i*x,canvas.height-obtenerCoorBurbuja(i));
+                lapiz.stroke();
+                };
+
+                lapiz.beginPath();
+                lapiz.strokeStyle="blue";
+                for (var i = 0; canvas.height-obtenerCoorMerge(i) > -5000; i++) {
+                lapiz.lineTo(i*x*2,canvas.height-obtenerCoorMerge(i));
+                lapiz.moveTo(i*x*2,canvas.height-obtenerCoorMerge(i));
+                lapiz.stroke();
+                };
+          
+          
+
+            }
+
+	</script>
+</head>
+<body>
+ 
+     
+    <br></br>
+
+    <input id="N_Selección" type="text">
+    <input type="button" value="Calcular Todo" onclick=" calcularSelección(); calcularBurbuja(); llamarMergeSort(); graficar();">
+
+    <br></br>
+
+    <div id="contentBurbuja" style="width:300px; border-style: double; border-color: red;">
+    <div id="C_Burbuja"></div>
+    <div id="F_Burbuja"></div>
+    </div>
+    
+     <br></br>
+
+    <div id="contentSelección" style="width:300px; border-style: double; border-color: green;">
+    <div id="C_Selección"></div>
+    <div id="F_Selección"></div>
+
+    </div>
+
+
+
+    <br></br>
+    <div id="arreglo" style="width:1000px; border-style: double; border-color: blue;">
+    <div id = "M_Arreglo"></div>
+    <div id="C_merge"></div>
+    <div id="F_merge"></div>
+    
+    </div>
+
+      <br></br>
+        <canvas id="canvasGrafica" width="500" height="500"></canvas>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>METODO DE SELECCION</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script>
+          var N;
+          var a;
+          var U;
+            function calcular() {
+                x = document.getElementById("N");
+                N = x.value;
+                U = (N/(N*0.1));
+                a = new Array(N);
+                
+                for (i=0;i<N;i++) {
+                    a[i] = N-i;
+                }
+                c = 0;
+                c+=3;
+                for (i=0;i<N-1;i++) {
+                    c+=3;
+                    min = i;
+                    c++; c+=3;
+                    for (j=i+1;j<N;j++) {
+                        c+=6;
+                        if (a[j]<a[min]) {
+                           min = j;
+                        } 
+                    }
+                    aux = a[i];
+                    a[i] = a[min];
+                    a[min] = aux;
+                    c+=7;
+                }
+                x = document.getElementById("c");
+                x.innerHTML = "Conteo: " + c;
+                Formula = 3*Math.pow(N,2)+(11*N)-11;
+                x = document.getElementById("F");
+                x.innerHTML = "Formula: " + Formula;
+            }
+
+           function obtenerCoor(w) {
+                
+                P = w;
+                q = new Array(P);
+                for (i=0;i<P;i++) {
+                    q[i] = P-i;
+                }
+                c = 0;
+                c+=3;
+                for (i=0;i<P-1;i++) {
+                    c+=3;
+                    min = i;
+                    c++; c+=3;
+                    for (j=i+1;j<P;j++) {
+                        c+=6;
+                        if (q[j]<q[min]) {
+                           min = j;
+                        } 
+                    }
+                    aux = q[i];
+                    q[i] = q[min];
+                    q[min] = aux;
+                    c+=7;
+                }
+               return c;
+            }
+
+            function graficar(){
+            	var canvas = document.getElementById("canvasGrafica");
+            	var lapiz = canvas.getContext("2d");
+            	lapiz.fillStyle = "#FF0000";
+            	lapiz.fillStyle = "#FFF";
+            	lapiz.fillRect(0,0,canvas.width,canvas.height);
+            	lapiz.strokeRect(0,0,canvas.width,canvas.height);
+
+                lapiz.fillStyle = "#000000";
+                lapiz.beginPath();
+            	lapiz.moveTo(0,canvas.height);
+            	var x =canvas.width/U;
+                for (var i = 0; canvas.height-obtenerCoor(i) > -5000; i++) {
+	            lapiz.lineTo(i*x,canvas.height-obtenerCoor(i));
+            	lapiz.moveTo(i*x,canvas.height-obtenerCoor(i));
+                lapiz.strokeStyle="green";
+            	lapiz.stroke();
+                };
+            }
+
+
+        </script>
+    </head>
+
+    <body>
+    Método de Selección
+      <br></br>
+        <input id="N" type="text">
+        <input type="button" value="Calcular" onclick="calcular(); graficar();">
+        <div id="c"></div>
+        <div id="F"></div>
+      <br></br>
+        <canvas id="canvasGrafica" width="500" height="500"></canvas>
+    </body>
+
+</html>
