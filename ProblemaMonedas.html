@@ -55,8 +55,6 @@ function crearTabla(m,n){
       body.appendChild(tabla);
 }
 
-
-
   function conseguirDatos(){ 
      o=document.getElementById("m");
      cantidadMonedas=o.value;
@@ -71,7 +69,7 @@ function crearTabla(m,n){
      	 var cantidadVueltas=0;
          cantidadExistente=document.getElementById("A"+i+"_"+j).value;
          valorExistente=document.getElementById("A"+(parseInt(i)+1)+"_"+j).value;
-         while(cantidadExistente>0 && vueltas>=valorExistente){
+         while(parseInt(cantidadExistente)>0 && parseInt(vueltas)>=parseInt(valorExistente)){
           cantidadVueltas++;
           vueltas=vueltas-valorExistente;
           cantidadExistente=cantidadExistente-1;
@@ -114,8 +112,15 @@ function graficar(){
       v.appendChild(campo);
       body.appendChild(campo);  
       };
-      
 }
+
+
+
+          // h="";
+     // for (var i = 0; i <resultados.length; i++) {
+      //	h+=resultados[i]+", ";
+     // };
+     // alert(h);
 
 </script>
     </head>
