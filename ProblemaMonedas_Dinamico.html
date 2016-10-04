@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+     <meta charset="UTF-8">
+      <script>
+
+var den=0;
+var vueltas=0;
+function crearTabla(m,n,indice){   
+
+      if (document.getElementById("tabla"+indice)!=null){
+      var elemento = document.getElementById("tabla"+indice);
+        elemento.parentNode.removeChild(elemento);
+      }
+
+      var body = document.getElementsByTagName("body")[0];
+      var tabla   = document.createElement("table");
+      var caption = document.createElement("caption");
+      tabla.setAttribute("id", "tabla"+indice);
+      if(indice==2){
+        tabla.setAttribute("style","background:#FF8C00;margin:30px;");
+      }else{
+        tabla.setAttribute("style","background:#B0C4DE;margin:30px;");
+      }
+      caption.setAttribute("style","height:50px;border: 2px solid #555555;background:#B0C4DE;");
+      var name = document.createTextNode("DATOS INICIALES");
+      caption.appendChild(name);
+      var tblBody = document.createElement("tbody");
+      for (var i = 0; i < m; i++) {
+      var hilera = document.createElement("tr");
+      if(i==0&&indice==0){
+          var name = document.createTextNode("Denominaciones");
+          hilera.appendChild(name);
+       }
+      for (var j = 0; j < n; j++) {
+        var celda = document.createElement("td");
+        celda.setAttribute("width", "55px");
+        if(j==0&&indice>0){
+           if(i==0){
+             var text="";
+           }else{
+             var temp=document.getElementById("A00_"+(i-1));
+             var text=temp.value;
+           }
+          celda.appendChild(document.createTextNode(text));
+          celda.setAttribute("style", "text-align:center;");
+        }
+        else if(i==0&&j>0&&indice>0){
+          var text=j;
+          celda.appendChild(document.createTextNode(text));
+          celda.setAttribute("style", "text-align:center;");
+        }
+        else{
+        var textoCelda = document.createElement("input");
+        textoCelda.setAttribute("id", "A"+indice+i+"_"+j);
+        textoCelda.setAttribute("size", "4");
+        textoCelda.setAttribute("style", "text-align:center;");
+        if(indice>0){textoCelda.disabled = true;}
+        celda.appendChild(textoCelda);
+      }
+        hilera.appendChild(celda);
+       }
+        tblBody.appendChild(hilera);
+       }
+      if(indice==0){
+      tabla.appendChild(caption);
+      }
+      tabla.appendChild(tblBody);
+      v=document.getElementById("matriz");
+      v.appendChild(tabla);
+      body.appendChild(tabla);
+}
+function conseguirDatos(){
+  val=document.getElementById("den");
+  den=val.value;
+  crearTabla(1,den,0);
+}
+function mostrarTablas(){
+  val=document.getElementById("vueltas");
+  vueltas=val.value;
+  crearTabla(parseInt(den)+1,parseInt(vueltas)+1,1);
+  crearTabla(parseInt(den)+1,parseInt(vueltas)+1,2);
+}
+
+function calcular(){
+  monedasA = new Array(den);
+  vueltasA = new Array(den+1);
+  for (i = 0; i < den; i++){
+      cp = document.getElementById("A00_"+i).value;
+      monedasA[i] = Number(cp);
+  }
+  for (i = 0; i < vueltas; i++){
+      vueltasA[i] = i+1;
+  }
+
+  for (i = 0; i < monedasA.length; i++){
+    for (j = 0; j < vueltasA.length; j++) {
+          if(i==0&&(vueltasA[j]%monedasA[i])>0){
+            x = document.getElementById("A1"+(i+1)+"_"+(j+1));
+            x.value = "∞";
+            y = document.getElementById("A2"+(i+1)+"_"+(j+1));
+            y.value = "∞";
+          }else if(i==0&&(vueltasA[j]%monedasA[i])==0){
+            var val = (vueltasA[j]/monedasA[i]);
+            x = document.getElementById("A1"+(i+1)+"_"+(j+1));
+            x.value = val;
+            y = document.getElementById("A2"+(i+1)+"_"+(j+1));
+            y.value = val+":"+monedasA[i];
+          }else if(i>0&&(vueltasA[j]%monedasA[i])==0){
+            var val = (vueltasA[j]/monedasA[i]);
+            x = document.getElementById("A1"+(i+1)+"_"+(j+1));
+            x.value = val;
+            y = document.getElementById("A2"+(i+1)+"_"+(j+1));
+            y.value = val+":"+monedasA[i];
+          }else if(i>0){
+              if(monedasA[i]>vueltasA[j]){
+                  a = document.getElementById("A1"+(i)+"_"+(j+1)).value;
+                  b = document.getElementById("A2"+(i)+"_"+(j+1)).value;
+                  x = document.getElementById("A1"+(i+1)+"_"+(j+1));
+                  x.value = a;
+                  y = document.getElementById("A2"+(i+1)+"_"+(j+1));
+                  y.value = b;
+              }else if(monedasA[i]<vueltasA[j]){
+                  a = document.getElementById("A1"+(i)+"_"+(j+1)).value;
+                  b = document.getElementById("A2"+(i)+"_"+(j+1)).value;
+                  if(monedasA[i-1]==(vueltasA[j]-monedasA[i])){
+                      var val = parseInt(vueltasA[j]/monedasA[i]);
+                      x = document.getElementById("A1"+(i+1)+"_"+(j+1));
+                      x.value = val+1;
+                      y = document.getElementById("A2"+(i+1)+"_"+(j+1));
+                      y.value = val+":"+monedasA[i]+"+"+"1:"+monedasA[i-1];
+                  }else{
+                    var val = (vueltasA[j]-monedasA[i]);
+                    var cociente = parseInt(vueltasA[j]/monedasA[i]);
+                    var bandera = false;
+                    alert(val+" resta y divicion"+cociente);
+              //      for (i = 0; i < den; i++){
+              //        if(val==monedasA[i]){
+              //          bandera=true;
+               //       }
+               //     }
+                  //  if(bandera==true){
+                   //   x = document.getElementById("A1"+(i+1)+"_"+(j+1));
+                    //  x.value = cociente+1;
+                    //  y = document.getElementById("A2"+(i+1)+"_"+(j+1));
+                     // y.value = cociente+":"+monedasA[i]+"+"+"1:"+monedasA[val];
+                //    }
+                  }
+              }
+          }
+    }
+  }
+}
+
+      </script>
+</head>
+<body>
+Cantidad monedas: 
+ <input id="den" type="text" style="size:3;"><input type="button" value="ok"  onclick="conseguirDatos();">
+    <br>Vueltas:
+    <input id="vueltas" type="text" style="size:4;"><input type="button" value="ok" style="margin-top: 10px;" onclick="mostrarTablas(); calcular();">
+    <div id="matriz"></div>
+</body>
+</html>
