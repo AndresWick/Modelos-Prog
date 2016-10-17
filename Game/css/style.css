@@ -1,0 +1,103 @@
+html,
+body {
+  background-color: #fff;
+  height: 100%;
+}
+
+body {
+  color: #fff;
+  font: 100%/1.5 sans-serif;
+}
+
+#contenedor{
+width: 100%;
+display: flex;
+justify-content: center;
+
+}
+
+canvas{
+    position: center;
+    border: $line-color 1px solid;
+    box-shadow: 0px 0px 20px black;
+    width: $width;
+}
+
+#puntaje{
+ color: #222;
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 5px;
+  text-align: center;
+  margin: 10px;
+}
+
+#texto3d{
+  font-size: 2.5em;
+  text-align: center;
+  color: #c1c1c1;
+
+  margin-bottom: 30px;
+  text-shadow: 2px 2px #000,
+             1px 1px #142533,
+             2px 2px #142533,
+             3px 3px #142533,
+             4px 4px #142533,
+             5px 5px #142533,
+             6px 6px #142533,
+             7px 7px #142533,
+             8px 8px #142533,
+             9px 9px #142533,
+             10px 10px #142533,
+             11px 11px #142533,
+             12px 12px #142533,
+             13px 13px #142533,
+             14px 14px #142533,
+             15px 15px #142533,
+             16px 16px #142533,
+             17px 17px #142533,
+             18px 18px #142533,
+             19px 19px #142533,
+             20px 20px #142533,
+             21px 21px #142533,
+             22px 22px #142533,
+             23px 23px #142533,
+             24px 24px #142533,
+             25px 25px #142533,
+             26px 26px #142533,
+             27px 27px #142533,
+             28px 28px #142533,
+             29px 29px #142533,
+             30px 30px #142533,
+             31px 31px #142533,
+             32px 32px #142533,
+             33px 33px #142533,
+             34px 34px #142533,
+             35px 35px #142533,
+             36px 36px #142533,
+             37px 37px #142533,
+             38px 38px #142533,
+             39px 39px #142533,
+             40px 40px #142533;
+  transform: rotate(-6deg);
+}
+
+.boton {
+  display: inline-block;
+  background: teal;
+  line-height: 3em;
+  padding: 0 1.5em;
+  margin-left: 10%;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 1.5em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  position: top;
+}
+
+.boton:hover {
+  background: #142533;
+}
+
+
