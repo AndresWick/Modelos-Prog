@@ -1,4 +1,31 @@
-$(document).ready(jugar);
+$(document).ready(function(){
+	$("#Jugar").click(function(){
+		jugar();
+		$('#Jugar').hide();
+		$('#Pausa').show();
+		$('#Reanudar').hide();
+	});
+	$('#Pausa').click(function(){
+		clearInterval(game_loop);
+		$('#Pausa').hide();	
+		$('#Reanudar').show();
+		$('#Salir').show();
+	});
+	$('#Reanudar').click(function(){
+		clearInterval(game_loop);
+		$('#Pausa').show();	
+		$('#Reanudar').hide();
+	game_loop = setInterval(dibujar, 60);
+	});
+	$("#Salir").click(function(){
+		clearInterval(game_loop);
+		$('#Jugar').show();	
+		$('#Pausa').hide();
+		$('#Reanudar').hide();
+		$('#Salir').hide();
+	
+	});
+});
 
 var canvas = $("#canvas")[0];
 var contexto = canvas.getContext("2d");
@@ -40,17 +67,31 @@ function crear_comida(){
 }
 
 function dibujar(){
-	contexto.fillStyle = "#c1c1c1";
+/*	contexto.fillStyle = "hsla(244, 11%, 80%, 1)";
 	contexto.fillRect(0, 0, w, h);
 	contexto.strokeStyle = "white";
-	contexto.strokeRect(0, 0, w, h);
-
+	contexto.strokeRect(0, 0, w, h);/*
+/*
 	for(var i=0;i<(canvas.height/10);i++){
 		for (var j=0;j<(canvas.width/10); j++) {
 			contexto.strokeRect(10*i, 10*j, 10, 10);
 		};
 	}
-		
+      */
+ /*   $("#canvas").css({
+    "position": "center",
+    "border": "$line-color 1px solid",
+    "box-shadow": "0px 0px 20px black",
+    "width": "$width",
+    "background-image": "-webkit-linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), -webkit-linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black)",
+	"background-image": "linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black)",
+    "background-size":"20px 20px",
+    "background-position":"0 0, 10px 10px"
+    });
+*/
+
+	$("#canvas").css("background-image","-webkit-linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), -webkit-linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black)");
+
 	var posX = serpiente[0].x;
 	var posY = serpiente[0].y;
 
@@ -58,13 +99,18 @@ function dibujar(){
 	else if(direccion == "left") posX--;
 	else if(direccion == "up") posY--;
 	else if(direccion == "down") posY++;
-		
+	
 	if(posX == -1 || posX == w/tamCuadro || posY == -1 || posY == h/tamCuadro || colision(posX, posY, serpiente)){
-		jugar();
+		$('#songs2')[0].play();
+		$('#Pausa').hide();
+		$('#Reanudar').hide();
+		$('#Jugar').show();
+		clearInterval(game_loop);	
 		return;
 	}
 	if(posX == comida.x && posY == comida.y){
 		var tail = {x: posX, y: posY};
+		$('#songs')[0].play();
 		puntaje++;
 		crear_comida();
 	}else{
@@ -85,9 +131,9 @@ function dibujar(){
 }
 	
 function dibujar_celda(x, y){
-	contexto.fillStyle = "#222";
+	contexto.fillStyle = "hsla(79, 100%, 50%, 1)";
 	contexto.fillRect(x*tamCuadro, y*tamCuadro, tamCuadro, tamCuadro);
-	contexto.strokeStyle = "white";
+	contexto.strokeStyle = "hsla(187, 2%, 50%, 1)";
 	contexto.strokeRect(x*tamCuadro, y*tamCuadro, tamCuadro, tamCuadro);
 }
 	
