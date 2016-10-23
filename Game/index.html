@@ -13,15 +13,10 @@
 
   </head>
 
+
   <body>
-  <h3 id="texto3d">Snake Game</h3>
-  <div id="puntaje"></div>
-  <div id="contenedor">
- <div class="btn-group-vertical">
-  <button id="Jugar" class="btn btn-success"> <span class="glyphicon glyphicon-fast-backward"></span></button>
-  <button id="Pausa" class="btn btn-primary"> <span class="glyphicon glyphicon-pause"></span></button>
-  <button id="Reanudar" class="btn btn-warning"> <span class="glyphicon glyphicon-play"></span></button>
-  <button id="Salir" class="btn btn-danger"> <span class="glyphicon glyphicon-stop"></span></button>
+
+  <div id="particles-js"></div>
     <audio id="songs">
       <source src="sonidos/nava.mp3" type="audio/mpeg">
     </audio>
@@ -29,12 +24,30 @@
       <source src="sonidos/pierde.mp3" type="audio/mpeg">
     </audio>
 
+
+
+    <h3 id="texto3d">Snake Game</h3>
+  <div id="puntaje"></div>
+  <div id="contenedor">
+    <div class="btn-group-vertical">
+      <button id="Jugar" class="btn btn-success"> <span class="glyphicon glyphicon-fast-backward"></span></button>
+      <button id="Pausa" class="btn btn-primary"> <span class="glyphicon glyphicon-pause"></span></button>
+      <button id="Reanudar" class="btn btn-warning"> <span class="glyphicon glyphicon-play"></span></button>
+    </div>
+    <canvas id="canvasGame" width="450" height="450"></canvas>
+    <div class="btn-group-vertical">
+      <button id="Instrucciones" class="btn btn-success"> <span class="glyphicon glyphicon-tags"></span></button>
+    </div>
   </div>
-    <canvas id="canvas" width="450" height="450"></canvas>
-  </div>
+
+
+
+  
+
+  <script src="js/particles.js"></script>
+   <script src="js/app.js"></script>
   <script src="js/funciones.js"></script>
 
-    
-    
+  
   </body>
 </html>
