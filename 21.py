@@ -125,7 +125,7 @@ def jugar(a,b,c):
       c.append(a[1]);
       jugar(a[2:],b,c);
    else:
-      print("Su Mano : ");
+      print("Tu Mano : ");
       print(b);
       c.append(input("Desea otra carta? "));
       print("============================================");
